@@ -48,17 +48,16 @@ export default function Register() {
   };
 
   return (
-   <div
-  className="min-h-screen flex flex-col items-center p-6 bg-cover bg-center bg-no-repeat"
-  style={{ backgroundImage: "url('/bg.jpg')" }}
->
+    <div
+      className="min-h-screen flex flex-col items-center justify-center p-6 bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: "url('/bg.jpg')" }}
+    >
+      <div className="bg-white/60 backdrop-blur-md rounded-2xl p-8 max-w-md w-full shadow-lg">
+        <header className="text-center mb-6">
+          <h1 className="text-3xl sm:text-4xl font-bold text-amber-900">NED University Result Notifier</h1>
+          <p className="text-gray-700 mt-2 text-sm sm:text-base">Register to get notified when your results are uploaded</p>
+        </header>
 
-      <header className="mb-8 text-center bg-white/40 p-6 rounded-xl ">
-        <h1 className="text-4xl font-bold text-amber-900">NED University Result Notifier</h1>
-        <p className="text-gray-700 mt-2">Register to get notified when your results are uploaded</p>
-      </header>
-
-      <div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-md">
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <label className="flex flex-col text-gray-700">
             Email
@@ -68,7 +67,7 @@ export default function Register() {
               onChange={(e) => setEmail(e.target.value)}
               required
               placeholder="you@example.com"
-              className="mt-1 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400"
+              className="mt-1 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400 transition"
             />
           </label>
 
@@ -78,7 +77,7 @@ export default function Register() {
               value={department}
               onChange={(e) => setDepartment(e.target.value)}
               required
-              className="mt-1 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400"
+              className="mt-1 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400 transition"
             >
               <option value="">Select Department</option>
               {undergraduateDepartments.map((dep) => (
@@ -93,7 +92,7 @@ export default function Register() {
               value={year}
               onChange={(e) => setYear(e.target.value)}
               required
-              className="mt-1 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400"
+              className="mt-1 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400 transition"
             >
               <option value="">Select Year</option>
               {undergraduateYears.map((y) => (
@@ -110,12 +109,16 @@ export default function Register() {
           </button>
         </form>
 
-        {message && <p className="mt-4 text-center text-green-600">{message}</p>}
-      </div>
+        {message && (
+          <p className={`mt-4 text-center ${message.startsWith("✅") ? "text-green-600" : "text-red-600"}`}>
+            {message}
+          </p>
+        )}
 
-      <footer className="mt-12 text-gray-600 text-sm">
-        © 2025 NED University of Engineering & Technology
-      </footer>
+        <footer className="mt-6 text-gray-600 text-xs sm:text-sm text-center">
+          © 2025 NED University of Engineering & Technology
+        </footer>
+      </div>
     </div>
   );
 }
